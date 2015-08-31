@@ -9,10 +9,7 @@ Teespring made a Slack bot, because we're all about automation. You too can run 
 
 Setup
 -----
-1. Clone the repo with `git clone git@github.com:teespring/caviar-slack-bot.git` and `cd caviar-slack-bot`.
-1. Make an account on [Heroku](Heroku) and install the Heroku Toolbelt command line tools by going [here](http://toolbelt.heroku.com).
-1. Create a new Heroku app: `heroku create [YOUR_DESIRED_APP_NAME]`.
-1. Push the Caviar Slack bot to your new heroku app: `git push heroku master`.
+1. [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 1. Get an account with [Twilio](http://www.twilio.com). You'll probably want to add money to the account so that the voice messaging system feature works properly.
 1. Get a Twilio phone number. Doesn't matter what it is. Write this number down.
 1. Manage this number in the Twilio web UI. Add two HTTP POST webhooks, one for voice, one for SMS:

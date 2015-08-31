@@ -1,0 +1,7 @@
+{
+  "name": "Caviar Slack Bot",
+  "description": "Solves real-world San Francisco startup problems",
+  "repository": "https://github.com/teespring/caviar-slack-bot",
+  "logo": "http://img1.wikia.nocookie.net/__cb20100324041931/disney/images/9/99/FatCat.jpg",
+  "keywords": ["ruby", "sinatra", "caviar", "twilio", "slack"]
+}
