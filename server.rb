@@ -18,7 +18,7 @@ class Server < Sinatra::Application
 
   def alert_slack(text)
     uri = URI(slack_url)
-    message = "@here: #{text}"
+    message = "@here #{text}"
     icon_url = "#{base_url}/logo.jpg"
 
     https = Net::HTTP.new(uri.host, uri.port)
