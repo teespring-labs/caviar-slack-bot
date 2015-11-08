@@ -5,6 +5,8 @@ require 'net/http'
 require 'uri'
 require 'json'
 
+require File.expand_path('../lib/services/slack', __FILE__)
+
 class Server < Sinatra::Application
   helpers do
     def base_url
@@ -12,23 +14,12 @@ class Server < Sinatra::Application
     end
 
     def slack_url
-      ENV["SLACK_URL"]
+      @slack_url ||= ENV["SLACK_URL"]
     end
-  end
 
-  def alert_slack(text)
-    uri = URI(slack_url)
-    message = "<!here> #{text}"
-    icon_url = "#{base_url}/logo.jpg"
-
-    https = Net::HTTP.new(uri.host, uri.port)
-    https.use_ssl = true
-    req = Net::HTTP::Post.new(uri.path)
-    req.body = { text: message, username: "Caviar", icon_url: icon_url }.to_json
-
-    https.request(req)
-
-    puts "Posting message to Slack channel: #{message}"
+    def slack_client
+      @slack_client ||= SlackClient.new(slack_url: slack_url, base_url: base_url)
+    end
   end
 
   get '/' do
@@ -38,7 +29,7 @@ class Server < Sinatra::Application
 
   post '/sms' do
     puts "Received Twilio SMS: #{params.to_s}"
-    alert_slack(params[:Body])
+    slack_client.alert(params[:Body])
   end
 
   post '/voice' do
@@ -48,7 +39,7 @@ class Server < Sinatra::Application
       r.Say "Hello, Caviar driver. I am an automated answering system, but someone will call you back at this number shortly. You can also send text messages to this phone number and someone will read them."
     }.text
 
-    alert_slack("The Caviar driver called the contact number. Please return their call at #{params[:From]}. Thanks!")
+    slack_client.alert("The Caviar driver called the contact number. Please return their call at #{params[:From]}. Thanks!")
 
     response
   end
