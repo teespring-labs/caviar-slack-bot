@@ -11,7 +11,7 @@ namespace :slack do
     unless time.saturday? || time.sunday?
       client = SlackClient.new(slack_url: ENV["SLACK_URL"], base_url: ENV["BASE_URL"])
       time_remaining = (ENV['FIRST_REMINDER'] == 'true') ? '90 minutes' : '30 minutes'
-      client.alert("Caviar orders close in #{time_remaining}. Please find the menu in the latest weekly dinner email and order!")
+      client.alert("Caviar orders close in #{time_remaining}. Please find the menu in the latest weekly lunch email and order!")
     end
   end
 end
