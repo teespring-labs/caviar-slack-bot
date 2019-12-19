@@ -4,7 +4,7 @@ GEM
     builder (3.2.2)
     jwt (1.5.1)
     multi_json (1.11.2)
-    rack (1.6.4)
+    rack (1.6.12)
     rack-protection (1.5.3)
       rack
     rake (10.4.2)
